@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let templateStr = `hello,大家好，我是{{name}},我今年{{age}}岁了`
+        let data = {
+            name: 'lisi',
+            age: 13
+        }
+        function render(templateStr, data) {
+            return templateStr.replace(/\{\{(\w+)\}\}/g,function(str, $1) {
+                return data[$1]
+            })
+        }
+        console.log(render(templateStr, data))
+    </script>
+    <script src="jslib/mustache.js"></script>
+    <script type="text/javascript">
+        let obj = {
+            arr:[
+                {name: 'lisi', age: 13, hobby: ['a', 'b', 'c']},
+                {name: 'zhangsan', age: 25, hobby: [1, 2, 3]}
+            ]
+        }
+        let template = `
+            <ul>
+                {{#arr}}
+                    <li>{{name}},{{age}}</li>
+                    <li>
+                        {{#hobby}}
+                            <span>{{.}}</span>
+                        {{/hobby}}
+                    </li>
+                {{/arr}}
+            </ul>
+        `
+        // null代表
+        tokens = [
+            ['text','\n            <ul>\n', null, null],
+            ['#', 'arr',null,null, [
+                    ['text', '<li>',null,null],
+                    ['name', 'name',null,null],
+                    ['text', ',',null,null],
+                    ['name', 'age',null,null],
+                    ['text', '</li><li>',null,null],
+                    ['#', 'hobby', null. null, [
+                            ['text', '<span>',null,null],
+                            ['name', '.',null,null],
+                            ['text', '</span>',null,null]
+                        ]
+                    ],
+                    ['text', '</li>',null,null]
+                ]
+            ],
+            ['text', '</ul>',null,null]
+        ]
+        console.log(Mustache.render(template, data))
+    </script>
+</body>
+</html>

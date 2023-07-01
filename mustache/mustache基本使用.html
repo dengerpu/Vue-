@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <script type="text/template" id="template">
+        <ul>
+            {{#arr}}
+            <li>
+                <div>{{name}}的基本信息</div>
+                <div>
+                    <p>姓名：{{name}}</p>
+                    <p>年龄：{{age}}</p>
+                </div>
+            </li>
+            {{/arr}}
+        </ul>
+    </script>
+
+    <script src="jslib/mustache.js"></script>
+     <script type="text/javascript">
+        let data ={
+            arr: [
+                {name: '张三', age: 18},
+                {name: '李四', age: 16},
+            ]
+        } 
+        let templateStr = document.getElementById("template").innerHTML
+        let domStr = Mustache.render(templateStr, data)
+        document.querySelector("body").innerHTML = domStr
+    </script>
+</body>
+</html>

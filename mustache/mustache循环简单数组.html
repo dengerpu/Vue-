@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <ul id="ul"></ul>
+    <script type="text/javascript" src="jslib/mustache.js"></script>
+    <script type="text/javascript">
+        let template = `大家好,我是{{name}},今年{{age}}岁`
+        let info = {
+            name: '张三',
+            age: 18
+        }
+        document.getElementById('box'). innerHTML = Mustache.render(template, info)
+    </script>
+
+    <!-- 简单数组 -->
+    <script type="text/javascript">
+        let data ={
+            arr: ['a', 'b', 'c', {name: '张三', age: 14}, [1,2,3]]
+        } 
+        let template2 = `
+            {{#arr}}
+                <li>{{.}}</li>
+            {{/arr}}
+        `
+        document.getElementById('ul').innerHTML = Mustache.render(template2, data)
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul"></ul>
+    <div id="container"></div>
+    <script type="text/javascript" src="jslib/mustache.js"></script>
+
+    <!-- 数组嵌套 -->
+    <script type="text/javascript">
+        let data ={
+           arr: [
+                {name: '张三', age: 18, arr: [1,2,3,4]},
+                {name: '李四', age: 16, arr: [4,5,6,7]},
+            ]
+        } 
+        let template2 = `
+            {{#arr}}
+                <li>
+                    <div>{{name}}的基本信息</div>
+                    <div>
+                        <p>姓名：{{name}}</p>
+                        <p>年龄：{{age}}</p>
+                        <p> 嵌套数组内容:
+                            {{#arr}}
+                                {{.}}
+                            {{/arr}}
+                        </p>
+                    </div>
+                </li>
+            {{/arr}}
+        `
+        document.getElementById('ul').innerHTML = Mustache.render(template2, data)
+    </script>
+
+    <!-- bool值渲染 -->
+    <script type="text/javascript">
+        let template3 = `
+            {{#m}}
+                <h1>hello</h1>
+            {{/m}}
+        `
+        let obj = {
+            m: false
+        }
+        document.getElementById('container').innerHTML = Mustache.render(template3, obj)
+    </script>
+</body>
+</html>
