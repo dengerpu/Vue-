@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>index.html</h1>
+    <script src="/xuni/bundle.js"></script>
+
+    <script type="text/javascript">
+        let templateStr = `hello,大家好，我是{{name}},我今年{{age}}岁了`
+        let data = {
+            name: 'lisi',
+            age: 13
+        }
+        let obj = {
+            arr:[
+                {name: 'lisi', age: 13, hobby: ['a', 'b', 'c']},
+                {name: 'zhangsan', age: 25, hobby: [1, 2, 3]}
+            ]
+        }
+        let template = `
+            <ul>
+                {{#arr}}
+                    <li class='abc'>{{name}},{{age}}</li>
+                    <li>
+                        {{#hobby}}
+                            <span>{{.}}</span>
+                        {{/hobby}}
+                    </li>
+                {{/arr}}
+            </ul>
+        `
+        Mustache.render(templateStr, data)
+        // document.querySelector('body').innerHTML = Mustache.render(template, obj)
+        document.querySelector('body').innerHTML = Mustache.render(templateStr, data)
+    </script>
+</body>
+</html>
