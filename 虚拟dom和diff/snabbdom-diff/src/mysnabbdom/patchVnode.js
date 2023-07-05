@@ -1,4 +1,5 @@
 import createElement from './createElement.js'
+import updateChild from './updateChild.js'
 /**
  * 同一结点处理
  * @param  {[type]} oldVnode [description]
@@ -24,7 +25,7 @@ export default function patchVnode(oldVnode, newVnode) {
         if(oldVnode.children != undefined && oldVnode.children.length > 0) {
             // 新老结点都有children，这是复杂的情况
             console.log('新老结点都有children')
-            // TODO
+            updateChild(oldVnode.elm, oldVnode.children, newVnode.children)
         }else {
             // 老的没有，新的有
             // 清空老的结点里面的内容
