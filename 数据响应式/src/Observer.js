@@ -1,4 +1,5 @@
 import defineReactive from './defineReactive.js'
+import { def } from './utils.js'
 /**
  * 将一个正常的object转换为每个层级的属性都是响应式(可以被侦测的)
  */
@@ -16,23 +17,4 @@ export default class Observer {
             defineReactive(obj, key)
         }
     }
-}
-
-
-/**
- * 定义对象的配置信息，因为__ob__是要对用户不可遍历的，
- * 所以enumerable要设为false
- * @param  {[type]} obj        [description]
- * @param  {[type]} key        [description]
- * @param  {[type]} value      [description]
- * @param  {[type]} enumerable [description]
- * @return {[type]}            [description]
- */
-function def(obj, key, value, enumerable) {
-    Object.defineProperty(obj, key, {
-        value,
-        enumerable,
-        writable: true,
-        configurable: true
-    })
 }
