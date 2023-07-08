@@ -44,6 +44,9 @@ methods.forEach(methodsName => {
             ob.observerArray(inserted)
         }
         console.log(`监听到${methodsName}方法正在改变数组：${this}`)
+
+        ob.dep.notify();
+
         return result
     }, false)
 })

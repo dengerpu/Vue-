@@ -1,4 +1,5 @@
 import observe from './observe.js'
+import Dep from './Dep.js'
 /**
  * 侦听对象
  * @param  {[type]} obj [description]
@@ -7,6 +8,9 @@ import observe from './observe.js'
  * @return {[type]}     [description]
  */
 export default function defineReactive(obj, key, val) {
+
+    const dep = new Dep()
+
     if (arguments.length == 2) {
         val = obj[key]
     }
@@ -20,6 +24,13 @@ export default function defineReactive(obj, key, val) {
         get() {
             // let newobj = Object.keys(obj).join(.)
             console.log(`正在访问${obj}下的${key}属性`)
+            // 如果现在处于依赖收集阶段
+            if (Dep.target) {
+                dep.depend()
+                if (childObj) {
+                    childObj.dep.depend()
+                }
+            }
             return val
         },
         set(newValue) {
@@ -28,6 +39,9 @@ export default function defineReactive(obj, key, val) {
                val =  newValue
                // 当设置了新值，这个新值也要被observe
                childObj = observe(newValue);
+
+               // 发布订阅模式，通知dep
+               dep.notify()
             } 
         }
     })
