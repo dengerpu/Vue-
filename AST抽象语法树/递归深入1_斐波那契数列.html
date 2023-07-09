@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let cache = {}
+        function fib(n) {
+            console.count('计数')
+            // 先去缓存里面，也可以cache.hasOwnProperty()
+            if (n in cache) {
+                console.log('命中缓存，从缓存中拿', n, cache[n])
+                return cache[n]
+            }
+            const v = n == 0 || n == 1 ? 1 : fib(n - 1) + fib(n - 2)
+            cache[n] = v
+            return v
+        }
+        for(let i = 0; i < 10; i++) {
+            console.log(fib(i))
+        }
+    </script>
+</body>
+</html>

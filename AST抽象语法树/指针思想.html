@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        const str = 'aaaabbbbbcccccccccccccdddddd'
+        function findMaxRepeat(str) {
+            let i = 0, j = 1
+            let max = 0
+            // j从1开始的，所以循环 str.length - 1 次
+            for (let k = 0; k < str.length - 1; k++) {
+                // 也可以使用str.charAt(i)
+                if (str[i] !== str[j]) {
+                    if (j - i > max) {
+                        max = j - i
+                        console.log('max', max)
+                    }
+                    i = j
+                }
+                j++
+            }
+            return max
+        }
+        console.log(findMaxRepeat(str))
+    </script>
+</body>
+</html>

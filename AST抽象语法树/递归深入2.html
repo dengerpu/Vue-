@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        const arr = [1, 2, [3, [4, 5], 6], 7, [8], 9]
+        function converT(arr) {
+            let result = []
+            arr.forEach(item => {
+                if (Array.isArray(item)) {
+                   result.push({
+                     children: converT(item)
+                   }) 
+                } else {
+                    result.push({
+                        value: item
+                    })
+                }
+            })
+            return result
+        }
+        console.log(converT(arr))
+
+        // 转换函数写法2，参数不是arr这个词语，而是item，意味着现在item可能是数组，也可能是数字
+        // 即，写法1的递归次数要大大小于写法2。因为写法2中，遇见什么东西都要递归一下。
+        function converT2(item) {
+            if (Array.isArray(item)) {
+                return {
+                    children: item.map(_item => converT2(_item))
+                }
+            } else {
+                return {
+                    value: item
+                }
+            }
+        }
+        console.log(converT2(arr))
+    </script>
+</body>
+</html>
